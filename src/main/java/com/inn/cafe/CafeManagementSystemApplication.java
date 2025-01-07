@@ -11,5 +11,8 @@ public class CafeManagementSystemApplication {
 
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> aedcc04 (changes by Prabhat)
 }

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,24 +24,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     JwtFilter jwtFilter;
 
+
+
+    @Bean  // used to declare the bean into the configuration class
+    public PasswordEncoder passwordEncoder() {    // define passwordEncoder() as a PasswordEncoder bean that returns a BCryptPasswordEncoder.
+        return new BCryptPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
+    }
+
+/**
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+*/
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customerUserDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-//        return NoOpPasswordEncoder.getInstance();
-    }
+
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+
+
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    /*
+    /**
      * Override this 👆 method to expose the {@link AuthenticationManager} from
      * {@link #configure(AuthenticationManagerBuilder)} to be exposed as a Bean. For
      * example:
@@ -59,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-/*
+/**
     SESSION MANAGEMENT IMPLEMENTATION:
 
     Session data refers to information stored on the server to track a user's state during their session, such as
@@ -81,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //                .antMatcher() Restricts the security configurations to specific user-related endpoints (login, signup, and forgot password)
 //                 or it Specifies which URLs are publicly accessible.
-                .antMatchers("/user/login", "user/signup", "/user/forgotPassword")
+                .antMatchers("/user/login","/user/signup","/user/forgotPassword")
 
 //                .permitAll() Grants unrestricted access to the specified URLs.
                 .permitAll()
@@ -102,7 +114,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
 
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);  Configures session creation policy to be stateless.
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);  // Stateless session management
 
 
         // The `http.addFilterBefore()` method adds a custom filter before the specified filter in the security filter

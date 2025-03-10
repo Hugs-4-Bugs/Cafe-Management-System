@@ -39,6 +39,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("user not found");
     }
     public com.inn.cafe.POJO.User getUserDetail(){
+
         return userDetail;
     }
 }

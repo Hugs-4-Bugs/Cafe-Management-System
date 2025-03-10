@@ -17,4 +17,10 @@ public class CafeConstants {
     // in case of user is inserting invalid data [ used to validate whether user is inserting correct info or not ]
     // see the validation method code in UserServiceImpl
     public static final String INVALID_DATA = "Invalid Data";
+
+    public static final String USER_CREATED_SUCCESSFULLY = "User created successfully.";
+    public static final String USER_ALREADY_EXISTS = "User with this email already exists.";
+
+    public static final String  UNAUTHOROZED_ACCESS = "Unauthorized access";
+
 }

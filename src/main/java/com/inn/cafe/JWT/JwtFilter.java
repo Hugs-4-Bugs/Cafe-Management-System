@@ -44,10 +44,20 @@ public class JwtFilter extends OncePerRequestFilter {  // `OncePerRequestFilter`
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        if(httpServletRequest.getServletPath().matches("/user/login | /user/signup | /user/forgotPassword")){  // if this condition is satisfied then no teken validation is required
+
+       // skip the validation for public endpoints
+        /**
+//        if(httpServletRequest.getServletPath().matches("/user/login | /user/signup | /user/forgotPassword")){
+
+         Above 👆You are using the | (logical OR operator) in the matches() method, but it is not functioning as intended.
+         In regular expressions, | means "or", but your string is not properly formatted for that. It should be a
+         proper regular expression where the paths are separated by | without spaces, like this 👇:
+         */
+
+        if(httpServletRequest.getServletPath().matches("/user/login|/user/signup|/user/forgotPassword")){  // if this condition is satisfied then no teken validation is required
             filterChain.doFilter(httpServletRequest, httpServletResponse);
         } else {     // otherwise do filteration if user details not found/matches
-            String authorizationHeader = httpServletRequest.getHeader("Authorization");
+            String authorizationHeader = httpServletRequest.getHeader("Authorization");  // this Authorization is same which is present in postman
             String token = null;
 
             // here we are extracting the values 👇

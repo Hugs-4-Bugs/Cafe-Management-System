@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 
 /** here we are extracting all the category id which exists in Product 'p' where status is true. */
-@NamedQuery(name = "Category.getAllCategory", query = "select c from Category c")
-//@NamedQuery(name = "Category.getAllCategory", query = "select c from Category c where c.id IN (SELECT p.category.id FROM Product p WHERE p.status='true')")
+//@NamedQuery(name = "Category.getAllCategory", query = "select c from Category c")
+@NamedQuery(name = "Category.getAllCategory", query = "select c from Category c where c.id IN (SELECT p.category.id FROM Product p WHERE p.status='true')")
 
 
 @Data   // it will provide default zero argument constructor for our class, getters & setters for all the variables

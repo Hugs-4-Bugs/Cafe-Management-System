@@ -10,7 +10,11 @@ import java.io.Serializable;
 
 
 @NamedQuery(name = "Product.getAllProduct", query = "select new com.inn.cafe.Wrapper.ProductWrapper(p.id, p.name, " + "p.description, p.price, p.status,  p.category.id, p.category.name) from Product p")
-
+@NamedQuery(name = "Product.updateProductStatus", query = "update Product p set p.status = :status where p.id = :id")
+// word status in this query should be same as written in "private String status;", if you write "private String Status;" then also first letter of status should be capital in query as 'Status' not 'status'
+@NamedQuery(name = "Product.getProductByCategory", query = "select new com.inn.cafe.Wrapper.ProductWrapper(p.id, p.name) from Product p where p.category.id = :id and p.status = 'true' ")  // p.category.id is actually p.categoryId
+                                                                                              // p.id, p.name are the selected column name [i.e. id & name column is selected]
+@NamedQuery(name = "Product.getProductById", query = "select new com.inn.cafe.Wrapper.ProductWrapper(p.id, p.name, p.description, p.price) from Product p where p.id = :id")
 
 /** This above query fetches product details (id, name, description, price, status)
  along with associated category details (category id and category name),

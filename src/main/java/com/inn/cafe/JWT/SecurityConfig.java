@@ -124,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     }
-    /*
+    /**
      * Override this above 👆 method [ie. http.cors() method] to configure the {@link HttpSecurity}. Typically subclasses
      * should not invoke this method by calling super as it may override their
      * configuration. The default configuration is:
@@ -160,31 +160,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-
-//package com.inn.cafe.JWT;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//
-//@Configuration
-//public class SecurityConfig {
-//
-//    @Bean
-//    public UserDetailsService userDetailsService(CustomerUserDetailsService customerUserDetailsService) {
-//        return customerUserDetailsService;
-//    }
-//
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-//            throws Exception {
-//        return authenticationConfiguration.getAuthenticationManager();
-//    }
-//}

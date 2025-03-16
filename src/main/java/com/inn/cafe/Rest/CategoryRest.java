@@ -25,4 +25,6 @@ public interface CategoryRest {
     // API to update the category/product
     @PostMapping(path = "/update")
     ResponseEntity<String> updateCategory(@RequestBody(required = true) Map<String, String> requestMap);
+
+
 }

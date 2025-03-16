@@ -23,4 +23,6 @@ public class CafeConstants {
 
     public static final String  UNAUTHOROZED_ACCESS = "Unauthorized access";
 
+    public static final String STORE_LOCATION = "/Users/prabhatkumar/Downloads/com.inn.cafe/Bill Document";
+
 }

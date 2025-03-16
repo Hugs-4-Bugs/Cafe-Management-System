@@ -44,6 +44,25 @@ Hugs-4-Bugs Cafe Management System is a **Spring Boot-based** application design
    spring.datasource.url=jdbc:mysql://localhost:3306/cafe_management
    spring.datasource.username=root
    spring.datasource.password=yourpassword
+   
+   server.port = 8000
+   spring.mail.host=smtp.gmail.com
+   spring.mail.port=587
+   spring.mail.username=your_email
+   spring.mail.password=your_email_app_password
+   spring.mail.properties.mail.smtp.auth=true
+   spring.mail.properties.mail.smtp.starttls.enable=true
+
+   spring.jpa.show-sql=true
+   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+   spring.jpa.properties.hibernate.format_sql=true
+   spring.jpa.properties.hibernate.dialect.storage_engine=innodb
+
+   spring.datasource.hikari.maximum-pool-size=10
+   spring.datasource.hikari.minimum-idle=5
+   spring.datasource.hikari.idle-timeout=30000
+   spring.datasource.hikari.max-lifetime=1800000
    ```
 
 ### **Build and Run the Application**

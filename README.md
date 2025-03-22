@@ -131,5 +131,5 @@ Contributions are welcome! Fork the repository, make changes, and submit a pull 
 This project is licensed under the MIT License.
 
 ## **Contact**
-For any queries, reach out at **your-email@example.com** or open an issue on GitHub.
+For any queries, reach out at **mailtoprabhat72@gmail.com** or open an issue on GitHub.
 

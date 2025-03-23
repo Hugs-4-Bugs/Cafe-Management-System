@@ -145,23 +145,21 @@ You can import product and category data into the database using an Excel file. 
 | 15  | Pani Puri with chutney                        | Pani Puri           | 59    | available | Snacks        |
 
 
-### **Category Data** (Sheet Name: **Categories**)
 
-+----+---------------+---------+
-| id | name          | version |
-+----+---------------+---------+
-|  1 | Pizza         |       0 |
-|  2 | Dosa          |       0 |
-|  3 | Samosa        |       0 |
-|  4 | Litti-chokha  |       0 |
-|  5 | Butter-nan    |       0 |
-|  6 | Lime-juice    |       0 |
-|  7 | Fried-Rice    |       0 |
-|  8 | Roti sabji    |       0 |
-|  9 | Cold Coffee   |       0 |
-| 10 | Maggie Noodle |       0 |
-| 11 | Nan-Paratha   |       0 |
-+----+---------------+---------+
+### Category Table Data
+| id  | name           | version |
+|-----|----------------|---------|
+| 1   | Italian        | 0       |
+| 2   | Indian         | 0       |
+| 3   | Snacks         | 0       |
+| 4   | Bihari         | 0       |
+| 5   | Beverages      | 0       |
+| 6   | Fried-Rice     | 0       |
+| 7   | Roti sabji     | 0       |
+| 8   | Cold Coffee    | 0       |
+| 9   | Dosa           | 0       |
+| 10  | Lassi          | 0       |
+| 11  | Chinese        | 0       |
 
 
 Make sure to follow this format while creating the Excel file to ensure the proper data structure. The **category_name** in the **Product** sheet should match an existing **category_name** from the **Categories** sheet for successful import.

@@ -111,6 +111,86 @@ The dashboard provides an overview of:
 - Product and category distribution
 - Pending orders
 
+--- 
+## Project Structure
+
+📦 cafe-management-system
+│── 📂 .github
+│── 📂 Bill Document
+│── 📂 src
+│   ├── 📂 main
+│   │   ├── 📂 java/com/inn/cafe
+│   │   │   ├── 📂 Constants
+│   │   │   │   ├── CafeConstants.java
+│   │   │   ├── 📂 DAO
+│   │   │   │   ├── BillDao.java
+│   │   │   │   ├── CategoryDao.java
+│   │   │   │   ├── ProductDao.java
+│   │   │   │   ├── UserDao.java
+│   │   │   ├── 📂 JWT
+│   │   │   │   ├── CustomerUserDetailsService.java
+│   │   │   │   ├── JwtFilter.java
+│   │   │   │   ├── JwtUtil.java
+│   │   │   │   ├── SecurityConfig.java
+│   │   │   ├── 📂 POJO
+│   │   │   │   ├── Bill.java
+│   │   │   │   ├── Category.java
+│   │   │   │   ├── Product.java
+│   │   │   │   ├── User.java
+│   │   │   ├── 📂 Rest
+│   │   │   │   ├── BillRest.java
+│   │   │   │   ├── CategoryRest.java
+│   │   │   │   ├── DashBoardRest.java
+│   │   │   │   ├── ProductRest.java
+│   │   │   │   ├── UserRest.java
+│   │   │   ├── 📂 RestImpl
+│   │   │   │   ├── BillRestImpl.java
+│   │   │   │   ├── CategoryRestImpl.java
+│   │   │   │   ├── DashBoardRestImpl.java
+│   │   │   │   ├── ProductRestImpl.java
+│   │   │   │   ├── UserRestImpl.java
+│   │   │   ├── 📂 Service
+│   │   │   │   ├── BillService.java
+│   │   │   │   ├── CategoryService.java
+│   │   │   │   ├── DashBoardService.java
+│   │   │   │   ├── ExcelService.java
+│   │   │   │   ├── ProductService.java
+│   │   │   │   ├── UserService.java
+│   │   │   ├── 📂 ServiceImpl
+│   │   │   │   ├── BillServiceImpl.java
+│   │   │   │   ├── CategoryServiceImpl.java
+│   │   │   │   ├── DashBoardServiceImpl.java
+│   │   │   │   ├── ProductServiceImpl.java
+│   │   │   │   ├── UserServiceImpl.java
+│   │   │   ├── 📂 Utils
+│   │   │   │   ├── CafeUtils.java
+│   │   │   │   ├── EmailUtils.java
+│   │   │   ├── 📂 Wrapper
+│   │   │   │   ├── ProductWrapper.java
+│   │   │   │   ├── UserWrapper.java
+│   │   │   ├── CafeManagementSystemApplication.java
+│   │   ├── 📂 resources
+│   │   │   ├── application.properties
+│   ├── 📂 test
+│   │   ├── 📂 java/com/inn/cafe
+│   │   │   ├── 📂 Service
+│   │   │   │   ├── CategoryServiceIT.java
+│   │   │   │   ├── CategoryServiceTest.java
+│   │   │   ├── CafeManagementSystemApplicationTests.java
+│── 📂 target
+│── Dockerfile
+│── cafe-Dependency.txt
+│── HELP.md
+│── html Msg.pdf
+│── mvnw
+│── mvnw.cmd
+│── pom.xml
+│── ProductDetails.xlsx
+│── ProductDetails12.xlsx
+│── External Libraries
+│── Scratches and Consoles
+
+
 ## How to Use the Application
 
 1. Log in as an **Admin** or **Staff**.

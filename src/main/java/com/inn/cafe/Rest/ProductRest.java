@@ -1,12 +1,14 @@
 package com.inn.cafe.Rest;
 
+import com.inn.cafe.POJO.Product;
 import com.inn.cafe.Wrapper.ProductWrapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.Map;
+
 
 @RequestMapping(path = "/product")
 public interface ProductRest {
@@ -38,9 +40,12 @@ public interface ProductRest {
     @GetMapping(path = "/getById/{id}")
     ResponseEntity<ProductWrapper> getProductById(@PathVariable Integer id);
 
-
     // API to get the product from the Excel file
     @PostMapping(path = "/uploadExcel")
     ResponseEntity<String> uploadExcel(@RequestParam("file") MultipartFile file);
+
+    // API to implement pagination
+    @GetMapping(path = "/productList")
+    ResponseEntity<Page<Product>> listOfProduct(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size);
 
 }

@@ -1,6 +1,10 @@
 package com.inn.cafe.Service;
 
+import com.inn.cafe.POJO.Product;
 import com.inn.cafe.Wrapper.ProductWrapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,4 +31,5 @@ public interface ProductService {
 
     ResponseEntity<String> processExcelData(MultipartFile file);
 
+    Page<Product> listOfProduct(Pageable pageable);
 }

@@ -14,6 +14,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -332,6 +335,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+
     // ✅ Get String value from Excel cell safely
     private String getStringCellValue(Cell cell) {
         if (cell == null) return "";
@@ -369,4 +373,11 @@ public class ProductServiceImpl implements ProductService {
         }
         return true; // Row is empty
     }
+
+
+    @Override
+    public Page<Product> listOfProduct(Pageable pageable) {
+        return productDao.findAll(pageable); // Assumes ProductDao extends JpaRepository<Product, Long>
+    }
+
 }

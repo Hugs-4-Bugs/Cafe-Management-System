@@ -183,6 +183,3 @@ If you'd like to contribute to this project, feel free to:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
-
-This `README.md` includes the Excel sample structure for products and categories, along with details on how to import data into the system. Let me know if you'd like any further additions!

@@ -4,7 +4,6 @@ import com.inn.cafe.Constents.CafeConstants;
 import com.inn.cafe.DAO.BillDao;
 import com.inn.cafe.JWT.JwtFilter;
 import com.inn.cafe.POJO.Bill;
-import com.inn.cafe.POJO.User;
 import com.inn.cafe.Service.BillService;
 import com.inn.cafe.Utils.CafeUtils;
 import com.itextpdf.text.*;

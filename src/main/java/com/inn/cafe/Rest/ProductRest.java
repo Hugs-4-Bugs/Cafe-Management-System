@@ -3,6 +3,7 @@ package com.inn.cafe.Rest;
 import com.inn.cafe.Wrapper.ProductWrapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -36,5 +37,10 @@ public interface ProductRest {
     // API to get products by id
     @GetMapping(path = "/getById/{id}")
     ResponseEntity<ProductWrapper> getProductById(@PathVariable Integer id);
+
+
+    // API to get the product from the Excel file
+    @PostMapping(path = "/uploadExcel")
+    ResponseEntity<String> uploadExcel(@RequestParam("file") MultipartFile file);
 
 }

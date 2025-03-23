@@ -89,14 +89,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
 //                .authorizeRequests()  Starts the request authorization configuration.
-                .authorizeRequests()
+//                .authorizeRequests()
+                .authorizeHttpRequests()
 
 //                .antMatcher() Restricts the security configurations to specific user-related endpoints (login, signup, and forgot password)
 //                 or it Specifies which URLs are publicly accessible.
-                .antMatchers("/user/login","/user/signup","/user/forgotPassword")
+                .antMatchers("/user/login","/user/signup","/user/forgotPassword").permitAll()
 
 //                .permitAll() Grants unrestricted access to the specified URLs.
-                .permitAll()
+//                .permitAll()
+
+                .antMatchers("/api/category/**").hasRole("ADMIN")
 
 //                .anyRequest() Specifies that any other request should be authenticated.
                 .anyRequest()

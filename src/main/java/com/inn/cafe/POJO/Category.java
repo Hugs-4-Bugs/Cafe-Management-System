@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 /** here we are extracting all the category id which exists in Product 'p' where status is true. */
@@ -29,5 +30,13 @@ public class Category implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @Version  // optimistic locking machanism
+    @Column(name = "version")
+    private Integer version;
+
+    // implementation to add the product in category from Excel file
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products;
 
 }

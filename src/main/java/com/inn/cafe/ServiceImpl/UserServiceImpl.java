@@ -162,8 +162,6 @@ public class UserServiceImpl implements UserService {
 //            com.inn.cafe.POJO.User user = customerUserDetailsService.getUserDetail();
 */
 
-
-
             // If User is approved
             if(auth.isAuthenticated()){
 // here if in case user is not "true" for now, then it means user is not approved by the admin. And we'll return the message "Wait for admin approval."
@@ -185,7 +183,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-// to get all teh user by admin role
+// to get all the user by admin role
     @Override
     public ResponseEntity<List<UserWrapper>> getAllUser() {
         try {

@@ -3,6 +3,7 @@ package com.inn.cafe.Rest;
 import com.inn.cafe.POJO.Category;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ public interface CategoryRest {
     // API to update the category/product
     @PostMapping(path = "/update")
     ResponseEntity<String> updateCategory(@RequestBody(required = true) Map<String, String> requestMap);
+
+
 
 
 }

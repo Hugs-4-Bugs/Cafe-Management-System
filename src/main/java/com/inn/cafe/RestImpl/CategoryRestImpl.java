@@ -1,7 +1,10 @@
 package com.inn.cafe.RestImpl;
 
 import com.inn.cafe.Constents.CafeConstants;
+import com.inn.cafe.DAO.CategoryDao;
+import com.inn.cafe.DAO.ProductDao;
 import com.inn.cafe.POJO.Category;
+import com.inn.cafe.POJO.Product;
 import com.inn.cafe.Rest.CategoryRest;
 import com.inn.cafe.Service.CategoryService;
 import com.inn.cafe.Utils.CafeUtils;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import com.inn.cafe.Service.ExcelService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +25,16 @@ public class CategoryRestImpl implements CategoryRest {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CategoryDao categoryDao;
+
+    @Autowired
+    private ProductDao productDao;
+
+//    @Autowired
+//    private ExcelService excelService;
+
 
     @Override
     public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {

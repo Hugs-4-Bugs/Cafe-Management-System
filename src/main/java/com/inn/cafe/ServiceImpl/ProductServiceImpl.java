@@ -1,6 +1,7 @@
 package com.inn.cafe.ServiceImpl;
 
 import com.inn.cafe.Constents.CafeConstants;
+import com.inn.cafe.DAO.CategoryDao;
 import com.inn.cafe.DAO.ProductDao;
 import com.inn.cafe.JWT.JwtFilter;
 import com.inn.cafe.POJO.Category;
@@ -9,15 +10,19 @@ import com.inn.cafe.Service.ProductService;
 import com.inn.cafe.Utils.CafeUtils;
 import com.inn.cafe.Wrapper.ProductWrapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.io.InputStream;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -29,6 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private JwtFilter jwtFilter;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
 
     @Override
@@ -169,6 +177,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+
     @Override
     public ResponseEntity<String> deleteProduct(Integer id) {
         try {
@@ -190,6 +199,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     // Method to update the product status
+    @Transactional
     @Override
     public ResponseEntity<String> updateStatus(Map<String, String> requestMap) {
         try {
@@ -238,4 +248,125 @@ public class ProductServiceImpl implements ProductService {
         return new ResponseEntity<>(new ProductWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    public void validateAndSaveProducts(List<Product> products) {
+        List<Category> categories = categoryDao.findAll();
+        Set<Integer> validCategoryIds = categories.stream()
+                .map(Category::getId)
+                .collect(Collectors.toSet());
+
+        for (Product product : products) {
+            // Use product.getCategory().getId() instead of product.getCategoryFk()
+            if (validCategoryIds.contains(product.getCategory().getId())) {
+                productDao.save(product);
+            } else {
+                System.out.println("Invalid category ID: " + product.getCategory().getId());
+            }
+        }
+    }
+
+
+
+
+    // implementation to add the product in category from Excel file
+    @Override
+    public ResponseEntity<String> processExcelData(MultipartFile file) {
+        try (InputStream inputStream = file.getInputStream()) {
+            Workbook workbook;
+
+            // Detect file format (.xls or .xlsx)
+            if (file.getOriginalFilename().toLowerCase().endsWith(".xls")) {
+                workbook = new HSSFWorkbook(inputStream);
+            } else if (file.getOriginalFilename().toLowerCase().endsWith(".xlsx")) {
+                workbook = new XSSFWorkbook(inputStream);
+            } else {
+                return new ResponseEntity<>("Invalid file format. Please upload .xls or .xlsx", HttpStatus.BAD_REQUEST);
+            }
+
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Fetch the last inserted product to get the latest ID
+            Product lastProduct = productDao.findTopByOrderByIdDesc();
+            int newProductId = (lastProduct == null) ? 1 : lastProduct.getId() + 1;
+
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0 || isRowEmpty(row)) continue;
+
+                String categoryName = getStringCellValue(row.getCell(0)).trim();  // Trim the category name
+                String productName = getStringCellValue(row.getCell(1));
+                double price = getNumericCellValue(row.getCell(2));
+                String status = getStringCellValue(row.getCell(3));
+
+                // Ensure Category exists by name (not by ID)
+                Category category = categoryDao.findByName(categoryName)
+                        .orElseGet(() -> {
+                            // If category doesn't exist, create a new one
+                            Category newCategory = new Category();
+                            newCategory.setName(categoryName);
+                            return categoryDao.saveAndFlush(newCategory);  // Save the new category to DB
+                        });
+
+                // Check if product already exists with the same name and category
+                Product existingProduct = productDao.findByNameAndCategory_Id(productName, category.getId());
+                if (existingProduct != null) {
+                    System.out.println("⚠️ Product " + productName + " already exists in category " + categoryName + ". Skipping.");
+                    continue;  // Skip if product already exists
+                }
+
+                // Create Product with new dynamic ID from the database
+                Product product = new Product();
+                product.setId(newProductId++);
+                product.setName(productName);
+                product.setPrice((int) price);
+                product.setStatus(status);
+                product.setCategory(category);
+
+                productDao.save(product); // Save into DB
+            }
+
+            workbook.close(); // Close workbook after processing
+
+            return new ResponseEntity<>("File uploaded and processed successfully.", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error processing file: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    // ✅ Get String value from Excel cell safely
+    private String getStringCellValue(Cell cell) {
+        if (cell == null) return "";
+        if (cell.getCellType() == CellType.STRING) {
+            return cell.getStringCellValue();
+        } else if (cell.getCellType() == CellType.NUMERIC) {
+            return String.valueOf((int) cell.getNumericCellValue()); // Convert number to String
+        }
+        return "";
+    }
+
+    // ✅ Get Numeric value from Excel cell safely
+    private double getNumericCellValue(Cell cell) {
+        if (cell == null) return 0.0;
+        if (cell.getCellType() == CellType.NUMERIC) {
+            return cell.getNumericCellValue();
+        } else if (cell.getCellType() == CellType.STRING) {
+            try {
+                return Double.parseDouble(cell.getStringCellValue().trim()); // Convert String to double
+            } catch (NumberFormatException e) {
+                return 0.0; // Default to 0 if conversion fails
+            }
+        }
+        return 0.0;
+    }
+
+    // ✅ Check if a row is empty
+    private boolean isRowEmpty(Row row) {
+        if (row == null) return true;
+        for (int i = 0; i < row.getLastCellNum(); i++) {
+            Cell cell = row.getCell(i);
+            if (cell != null && cell.getCellType() != CellType.BLANK) {
+                return false; // Row is not empty
+            }
+        }
+        return true; // Row is empty
+    }
 }

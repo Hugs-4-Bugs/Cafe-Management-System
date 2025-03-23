@@ -112,8 +112,10 @@ The dashboard provides an overview of:
 - Pending orders
 
 --- 
+
 ## Project Structure
 
+```
 📦 cafe-management-system
 │── 📂 .github
 │── 📂 Bill Document
@@ -189,6 +191,9 @@ The dashboard provides an overview of:
 │── ProductDetails12.xlsx
 │── External Libraries
 │── Scratches and Consoles
+```
+
+
 
 
 ## How to Use the Application

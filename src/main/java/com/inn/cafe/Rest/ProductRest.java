@@ -46,6 +46,7 @@ public interface ProductRest {
 
     // API to implement pagination
     @GetMapping(path = "/productList")
-    ResponseEntity<Page<Product>> listOfProduct(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size);
+    Page<Product> getPaginatedProducts(@RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "5") int size);
 
 }

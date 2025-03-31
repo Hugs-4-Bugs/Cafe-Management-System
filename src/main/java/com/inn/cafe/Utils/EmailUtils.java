@@ -56,3 +56,26 @@ public class EmailUtils {
         emailSender.send(message);
     }
 }
+
+
+
+
+
+/**
+ * This class is used to send emails in the Cafe application.
+ * It has methods to send simple emails, emails with attachments, and emails with login details for password reset.
+ *
+ * The goal is to keep all email-related code in one place so it can be used easily whenever needed.
+ *
+ * Key Methods:
+ * - `sendSimpleMessage`: Sends a basic email with a subject and message, and can include attachments.
+ * - `forgotMail`: Sends an email with the user's login details (email and password) when they reset their password.
+ */
+
+/**
+ * The purpose of creating a separate `EmailUtils` class is to organize all the email-related functionality in one place.
+ * Instead of writing email sending logic in multiple places, we keep it here so that:
+ * 1. The code is cleaner and easier to manage.
+ * 2. We can reuse the email sending methods throughout the application without repeating the same code.
+ * 3. If we need to change how emails are sent, we can do it in one place, making updates faster and less error-prone.
+ */

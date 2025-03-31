@@ -1,6 +1,7 @@
 package com.inn.cafe.POJO;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -34,6 +35,7 @@ public class Category implements Serializable {
     @Version  // optimistic locking machanism
     @Column(name = "version")
     private Integer version;
+
 
     // implementation to add the product in category from Excel file
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)

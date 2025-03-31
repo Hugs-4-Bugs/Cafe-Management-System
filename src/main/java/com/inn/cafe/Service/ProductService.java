@@ -31,5 +31,5 @@ public interface ProductService {
 
     ResponseEntity<String> processExcelData(MultipartFile file);
 
-    Page<Product> listOfProduct(Pageable pageable);
+    Page<Product> getAllProductList(Pageable pageable);
 }

@@ -89,8 +89,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
 
 //                .authorizeRequests()  Starts the request authorization configuration.
-//                .authorizeRequests()
-                .authorizeHttpRequests()
+                .authorizeRequests()
+//                .authorizeHttpRequests()
 
 //                .antMatcher() Restricts the security configurations to specific user-related endpoints (login, signup, and forgot password)
 //                 or it Specifies which URLs are publicly accessible.
@@ -100,6 +100,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll()
 
                 .antMatchers("/api/category/**").hasRole("ADMIN")
+
+                // used for Swagger Implementation
+                .antMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui.html",
+                        "/webjars/**"
+                ).permitAll()    // swagger implementation ends here
 
 //                .anyRequest() Specifies that any other request should be authenticated.
                 .anyRequest()
@@ -140,26 +148,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

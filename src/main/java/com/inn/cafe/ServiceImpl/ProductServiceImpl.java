@@ -335,7 +335,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-
     // ✅ Get String value from Excel cell safely
     private String getStringCellValue(Cell cell) {
         if (cell == null) return "";
@@ -375,9 +374,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+
+// Pagination implementation
     @Override
-    public Page<Product> listOfProduct(Pageable pageable) {
-        return productDao.findAll(pageable); // Assumes ProductDao extends JpaRepository<Product, Long>
+    public Page<Product> getAllProductList(Pageable pageable) {
+        return productDao.findAll(pageable);
     }
 
 }

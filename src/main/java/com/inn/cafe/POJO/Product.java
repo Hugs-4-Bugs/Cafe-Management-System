@@ -1,6 +1,8 @@
 package com.inn.cafe.POJO;
 
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,6 +31,7 @@ import java.io.Serializable;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "product")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product implements Serializable {
 
     public static final Long serialVersionUID = 123456L;
@@ -46,6 +49,7 @@ public class Product implements Serializable {
         means here in this case if you select the category then it will load the category otherwise not
      * */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore  // @JsonIgnore completely removes the field from both serialization and deserialization
     @JoinColumn(name = "category_fk", nullable = false)    // category_fk = category foreign key
     private Category category;
 
@@ -62,3 +66,28 @@ public class Product implements Serializable {
     private String status;
 
 }
+
+
+/**
+ Issue: StackOverflowError due to infinite recursion between Product and Category entities.
+
+ Why did this happen?
+ - Both Product and Category implement Serializable, allowing them to be converted into JSON.
+ - Product has a reference to Category, and Category has a list of Products.
+ - When pagination is applied, Jackson tries to serialize the entities. It keeps navigating between Product and Category endlessly, causing a StackOverflowError.
+
+ Solution: Use @JsonIgnore to break the loop.
+
+ Fix: Updated Product entity
+
+
+ import com.fasterxml.jackson.annotation.JsonIgnore;
+
+ @ManyToOne
+ @JoinColumn(name = "category_fk")
+ @JsonIgnore   // Prevents infinite loop in JSON serialization
+ private Category category;
+
+
+ This prevents Jackson from serializing the category inside Product, stopping the infinite recursion error. *
+ */

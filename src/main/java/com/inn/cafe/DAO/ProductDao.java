@@ -2,6 +2,8 @@ package com.inn.cafe.DAO;
 
 import com.inn.cafe.POJO.Product;
 import com.inn.cafe.Wrapper.ProductWrapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,7 +33,6 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 
 
    // 🔹 Option 3: Use @Query with @Modifying
-
     /**
     if you use the Option 3 then remove the below line from Product POJO class:
     @NamedQuery(name = "Product.updateProductStatus", query = "update Product p set p.status = :status where p.id = :id")
@@ -54,4 +55,8 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 
 
     Product findByNameAndCategory_Id(String name, Integer id);
+
+
+    // Pagination implementaion
+    Page<Product> findAll(Pageable pageable);
 }

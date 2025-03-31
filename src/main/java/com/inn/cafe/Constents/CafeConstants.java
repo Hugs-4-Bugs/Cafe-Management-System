@@ -16,6 +16,10 @@ public class CafeConstants {
 
     // in case of user is inserting invalid data [ used to validate whether user is inserting correct info or not ]
     // see the validation method code in UserServiceImpl
+
+
+
+    // Constants for various messages and paths used in the application
     public static final String INVALID_DATA = "Invalid Data";
 
     public static final String USER_CREATED_SUCCESSFULLY = "User created successfully.";
@@ -26,3 +30,16 @@ public class CafeConstants {
     public static final String STORE_LOCATION = "/Users/prabhatkumar/Downloads/com.inn.cafe/Bill Document";
 
 }
+
+
+
+
+
+/**
+ * This class holds all the constant values used throughout the Cafe application.
+ * Constants are used to store fixed values like messages and paths that don't change.
+ *
+ * The purpose of this class is to avoid repeating the same values in multiple places,
+ * making the code cleaner and easier to maintain. Whenever a constant value is needed,
+ * we can refer to this class, ensuring consistency across the application.
+ */

@@ -67,3 +67,26 @@ public class CafeUtils {
         return false;
     }
 }
+
+
+
+
+/**
+ * Utility class that contains generic helper methods used across various services and classes in the application.
+ *
+ * The purpose of this class is to organize commonly used code, like generating unique IDs,
+ * converting data formats, or checking file existence, into reusable methods.
+ * These methods are static so they can be accessed directly with the class name, without needing to create an object.
+ *
+ * This helps to reduce redundancy in code and makes the application more maintainable and modular.
+ */
+
+
+/**
+ * The purpose of creating a separate `CafeUtils` class is to keep all commonly used helper methods in one place.
+ * Instead of writing the same code in multiple parts of the application, we can use these reusable methods
+ * wherever needed. This makes the code cleaner, easier to maintain, and reduces redundancy.
+ *
+ * By placing generic methods (like generating unique IDs, checking file existence, etc.) in this class,
+ * we ensure that we only have to update or fix them in one place, making the whole application more efficient.
+ */

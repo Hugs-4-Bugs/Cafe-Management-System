@@ -122,11 +122,14 @@ The dashboard provides an overview of:
 │── 📂 src
 │   ├── 📂 main
 │   │   ├── 📂 java/com/inn/cafe
+│   │   │   ├── 📂 Config
+│   │   │   │   ├── SwaggerConfig.java
 │   │   │   ├── 📂 Constants
 │   │   │   │   ├── CafeConstants.java
 │   │   │   ├── 📂 DAO
 │   │   │   │   ├── BillDao.java
 │   │   │   │   ├── CategoryDao.java
+│   │   │   │   ├── PaymentDao.java
 │   │   │   │   ├── ProductDao.java
 │   │   │   │   ├── UserDao.java
 │   │   │   ├── 📂 JWT
@@ -136,19 +139,26 @@ The dashboard provides an overview of:
 │   │   │   │   ├── SecurityConfig.java
 │   │   │   ├── 📂 POJO
 │   │   │   │   ├── Bill.java
+│   │   │   │   ├── CardPayment.java
 │   │   │   │   ├── Category.java
+│   │   │   │   ├── Payment.java
+│   │   │   │   ├── PaymentType.java
 │   │   │   │   ├── Product.java
+│   │   │   │   ├── UPIPayment.java
 │   │   │   │   ├── User.java
+│   │   │   │   ├── WalletPayment.java
 │   │   │   ├── 📂 Rest
 │   │   │   │   ├── BillRest.java
 │   │   │   │   ├── CategoryRest.java
 │   │   │   │   ├── DashBoardRest.java
+│   │   │   │   ├── PaymentRest.java
 │   │   │   │   ├── ProductRest.java
 │   │   │   │   ├── UserRest.java
 │   │   │   ├── 📂 RestImpl
 │   │   │   │   ├── BillRestImpl.java
 │   │   │   │   ├── CategoryRestImpl.java
 │   │   │   │   ├── DashBoardRestImpl.java
+│   │   │   │   ├── PaymentRestImpl.java
 │   │   │   │   ├── ProductRestImpl.java
 │   │   │   │   ├── UserRestImpl.java
 │   │   │   ├── 📂 Service
@@ -156,18 +166,22 @@ The dashboard provides an overview of:
 │   │   │   │   ├── CategoryService.java
 │   │   │   │   ├── DashBoardService.java
 │   │   │   │   ├── ExcelService.java
+│   │   │   │   ├── PaymentService.java
 │   │   │   │   ├── ProductService.java
 │   │   │   │   ├── UserService.java
 │   │   │   ├── 📂 ServiceImpl
 │   │   │   │   ├── BillServiceImpl.java
 │   │   │   │   ├── CategoryServiceImpl.java
 │   │   │   │   ├── DashBoardServiceImpl.java
+│   │   │   │   ├── PaymentServiceImpl.java
 │   │   │   │   ├── ProductServiceImpl.java
 │   │   │   │   ├── UserServiceImpl.java
 │   │   │   ├── 📂 Utils
 │   │   │   │   ├── CafeUtils.java
 │   │   │   │   ├── EmailUtils.java
+│   │   │   │   ├── PaymentUtils.java
 │   │   │   ├── 📂 Wrapper
+│   │   │   │   ├── PaymentWrapper.java
 │   │   │   │   ├── ProductWrapper.java
 │   │   │   │   ├── UserWrapper.java
 │   │   │   ├── CafeManagementSystemApplication.java
@@ -178,6 +192,7 @@ The dashboard provides an overview of:
 │   │   │   ├── 📂 Service
 │   │   │   │   ├── CategoryServiceIT.java
 │   │   │   │   ├── CategoryServiceTest.java
+│   │   │   │   ├── PaymentServiceTest.java
 │   │   │   ├── CafeManagementSystemApplicationTests.java
 │── 📂 target
 │── Dockerfile

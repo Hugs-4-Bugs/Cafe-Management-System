@@ -2,7 +2,8 @@
 
 Welcome to the **Cafe Management System** repository! This project is designed to help manage a cafe, including tracking categories, items, and handling billing with PDF generation and a detailed dashboard for efficient management.
 
-## Frontend: https://github.com/Hugs-4-Bugs/Cafe-Management-Frontend
+## Frontend: 
+ https://github.com/Hugs-4-Bugs/Cafe-Management-Frontend
 
 ## Features
 
